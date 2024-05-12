@@ -10,10 +10,10 @@ public class RegisterTests extends BaseTest {
 
     RegisterPage registerPage = new RegisterPage();
 
-    @Feature("Register Senaryoları")
+    @Feature("Register Test Senaryoları")
 
     @Test(description = "Başarılı Kullanıcı Oluşturma Testi")
-    public void userCreateTEST() {
+    public void UserCreateTEST() {
         mainPage
                 .clickRegisterMenu();
         registerPage
@@ -27,7 +27,7 @@ public class RegisterTests extends BaseTest {
     }
 
     @Test(description = "Var Olan Bilgilerle Sisteme Kayıt Testi")
-    public void existUserTEST(){
+    public void ExistUserTEST(){
         mainPage
                 .clickRegisterMenu();
         registerPage
