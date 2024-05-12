@@ -13,7 +13,7 @@ public class RegisterTests extends BaseTest {
     @Feature("Register Senaryoları")
 
     @Test(description = "Başarılı Kullanıcı Oluşturma Testi")
-    public void userCreate() {
+    public void userCreateTEST() {
         mainPage
                 .clickRegisterMenu();
         registerPage
@@ -24,9 +24,21 @@ public class RegisterTests extends BaseTest {
                 .fillPasswordConfirm("kitapyurdudeneme")
                 .checkTerms()
                 .clickSignUp();
+    }
 
-
-
+    @Test(description = "Var Olan Bilgilerle Sisteme Kayıt Testi")
+    public void existUserTEST(){
+        mainPage
+                .clickRegisterMenu();
+        registerPage
+                .fillFirstName("kitapyurdu")
+                .fillLastName("deneme")
+                .fillEmail("qatestdeneme@gmail.com")
+                .fillPassword("kitapyurdudeneme")
+                .fillPasswordConfirm("kitapyurdudeneme")
+                .checkTerms()
+                .clickSignUp()
+                .existUserError(existUserErrorMessage);
     }
 
 }

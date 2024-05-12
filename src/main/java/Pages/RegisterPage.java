@@ -4,6 +4,11 @@ import Base.BaseTest;
 import io.opentelemetry.sdk.metrics.internal.export.RegisteredReader;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+
+import java.time.Duration;
 
 public class RegisterPage extends BaseTest {
 
@@ -15,6 +20,8 @@ public class RegisterPage extends BaseTest {
     By checkTerms = By.className("ky-form-check-label");
     By checkCampaign = By.id("is_campaign_newsletter");
     By btnSignUp = By.xpath("//div[@class='ky-form-buttons']/button[contains(text(), 'Üye Ol')]");
+
+    By lblExistUserError = By.cssSelector("[class='ky-error']");
 
 
     @Step("Ad Alanı Doldurulur.")
@@ -63,6 +70,16 @@ public class RegisterPage extends BaseTest {
     @Step("Üye Ol Butonuna Tıklanır")
     public RegisterPage clickSignUp(){
         driver.findElement(btnSignUp).click();
+        return this;
+    }
+
+    @Step("Var Olan Kullanıcı Hatası")
+    public RegisterPage existUserError(String errorMessage){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // 10 saniye bekleyecek
+        wait.until(ExpectedConditions.visibilityOfElementLocated(lblExistUserError));
+
+        String text = driver.findElement(lblExistUserError).getText();
+        Assert.assertEquals(text, errorMessage);
         return this;
     }
 

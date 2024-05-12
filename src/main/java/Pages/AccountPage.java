@@ -26,4 +26,6 @@ public class AccountPage extends BaseTest {
         Assert.assertEquals(title, text);
         return this;
     }
+
+
 }
