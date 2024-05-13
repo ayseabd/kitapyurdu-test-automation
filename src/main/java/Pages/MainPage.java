@@ -2,6 +2,8 @@ package Pages;
 import Base.BaseTest;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 
 public class MainPage extends BaseTest {
@@ -14,9 +16,11 @@ public class MainPage extends BaseTest {
 
     By btnSearch = By.cssSelector("[class='common-sprite button-search']");
 
-    By profileMenu = By.cssSelector("[class='common-sprite']");
+    By profileMenu = By.className("common-sprite");
 
-    By userAccount = By.xpath("//div[text()='Hesabım']");
+    By userAccount = By.xpath("//html/body/div[1]/div[2]/div/div[1]/div[1]/ul/li/div/ul/li[1]/a[contains(text(), 'Hesabım')]");
+  //  By userAccount = By.xpath("//div[@class='menu top login']//ul//li//a//div//ul//li//a[contains(text(), 'Hesabım')]");
+//html/body/div[1]/div[2]/div/div[1]/div[1]/ul/li/div/ul/li[1]/a
 
     @Step("Giriş Yap Butonuna Tıklanır")
     public MainPage clickLoginMenu() {
@@ -42,6 +46,17 @@ public class MainPage extends BaseTest {
         return this;
     }
 
-    
+    @Step("Hesap Ayarlarına Tıklanır")
+    public MainPage goToUserAccount(){
+        Actions actions = new Actions(driver);
+
+        WebElement profileMenuElement = driver.findElement(profileMenu);
+        actions.moveToElement(profileMenuElement).perform();
+
+        WebElement userAccountElement = driver.findElement(userAccount);
+        userAccountElement.click();
+        return this;
+    }
+
 
 }
